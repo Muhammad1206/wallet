@@ -74,7 +74,7 @@ func (s *Service) Pay(accountID int64, amount types.Money, category types.Paymen
 	paymentID := uuid.New().String()
 	payment := &types.Payment{
 		ID:        paymentID,
-		ID:        IDForAccaunt,
+		IDForAccaunt: accountID,
 		Amount:    amount,
 		Category:  category,
 		Status:    types.StatusInProgress,
