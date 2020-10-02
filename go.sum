@@ -1,0 +1,4 @@
+github.com/Firdavs2002/wallet v0.0.0-20201001152216-6f3814ff6c6a h1:iVeEWLJxpOZ3qnKJI1x/lYYMHpl0L6TcYUsDmhInFLY=
+github.com/Firdavs2002/wallet v0.0.0-20201001152216-6f3814ff6c6a/go.mod h1:42hl0hQ293T4oJTLPo5zh+ALc5WxfrYXLVgZkAhAbkQ=
+github.com/google/uuid v1.1.2 h1:EVhdT+1Kseyi1/pUmXKaFxYsDNy9RQYkMWRH68J/W7Y=
+github.com/google/uuid v1.1.2/go.mod h1:TIyPZe4MgqvfeYDBFedMoGGpEw/LqOeaOT+nhxU+yHo=
