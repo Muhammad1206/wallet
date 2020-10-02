@@ -3,7 +3,7 @@ package wallet
 import (
 	"errors"
 
-	"github.com/Firdavs2002/wallet/pkg/types"
+	"github.com/Muhammad1206/wallet/pkg/types"
 	"github.com/google/uuid"
 )
 
@@ -74,10 +74,10 @@ func (s *Service) Pay(accountID int64, amount types.Money, category types.Paymen
 	paymentID := uuid.New().String()
 	payment := &types.Payment{
 		ID:        paymentID,
-		AccountID: accountID,
+		ID:        IDForAccaunt,
 		Amount:    amount,
 		Category:  category,
-		Status:    types.PaymentStatusInProgress,
+		Status:    types.StatusInProgress,
 	}
 
 	s.payments = append(s.payments, payment)
@@ -140,13 +140,13 @@ func (s *Service) Reject(paymentID string) error {
 		return err
 	}
 
-	acc, err := s.FindAccountByID(pay.AccountID)
+	acc, err := s.FindAccountByID(pay.IDForAccaunt)
 
 	if err != nil {
 		return err
 	}
 
-	pay.Status = types.PaymentStatusFail
+	pay.Status = types.StatusFail
 	acc.Balance += pay.Amount
 
 	return nil

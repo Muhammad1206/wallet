@@ -18,10 +18,11 @@ const (
 
 //Payment представляет информацию о платежа.
 type Payment struct{
-	ID        string
-	Amount    Money
-	Category  PaymentCategory
-	Status    PaymentStatus
+	IDForAccaunt           int64
+	ID                     string
+	Amount                 Money
+	Category               PaymentCategory
+	Status                 PaymentStatus
 }
 
 type Phone string
