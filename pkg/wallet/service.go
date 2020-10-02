@@ -74,10 +74,10 @@ func (s *Service) Pay(accountID int64, amount types.Money, category types.Paymen
 	paymentID := uuid.New().String()
 	payment := &types.Payment{
 		ID:        paymentID,
-		IDForAccaunt: accountID,
+		AccountID: accountID,
 		Amount:    amount,
 		Category:  category,
-		Status:    types.StatusInProgress,
+		Status:    types.PaymentStatusInProgress,
 	}
 
 	s.payments = append(s.payments, payment)
@@ -140,13 +140,13 @@ func (s *Service) Reject(paymentID string) error {
 		return err
 	}
 
-	acc, err := s.FindAccountByID(pay.IDForAccaunt)
+	acc, err := s.FindAccountByID(pay.AccountID)
 
 	if err != nil {
 		return err
 	}
 
-	pay.Status = types.StatusFail
+	pay.Status = types.PaymentStatusFail
 	acc.Balance += pay.Amount
 
 	return nil
