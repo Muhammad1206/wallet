@@ -4,7 +4,7 @@ import (
 	"testing"
 )
 
-func TestService_RegisterAccount_success(t *testing.T) { 
+func TestService_RegisterAccount_success(t *testing.T) {
 	svc := Service{}
 	svc.RegisterAccount("+9920000001")
 
@@ -84,8 +84,6 @@ func TestService_Reject_fail(t *testing.T) {
 		t.Errorf("\ngot > %v \nwant > nil", err)
 	}
 }
-
-
 
 func TestService_Repeat_success(t *testing.T) {
 	svc := Service{}
