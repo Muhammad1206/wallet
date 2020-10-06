@@ -122,24 +122,6 @@ func (s *Service) FindAccountByID(accountID int64) (*types.Account, error) {
 
 	return account, nil
 }
-
-// FindPaymentByID ищем платёж по ID
-func (s *Service) FindPaymentByID(paymentID string) (*types.Payment, error) {
-	var payment *types.Payment
-
-	for _, pay := range s.payments {
-		if pay.ID == paymentID {
-			payment = pay
-		}
-	}
-
-	if payment == nil {
-		return nil, ErrPaymentNotFound
-	}
-
-	return payment, nil
-}
-
 //Deposit method
 func (s *Service) Deposit(accountID int64, amount types.Money) error {
 	if amount < 0 {
@@ -188,6 +170,15 @@ func (s *Service) Repeat(paymentID string) (*types.Payment, error) {
 
 	return payment, nil
 }
+// FindFavoriteByID ищем платёж по ID в Избранное
+func (s *Service) FindFavoriteByID(favoriteID string) (*types.Favorite, error) {
+	for _, favorite := range s.favorites {
+		if favorite.ID == favoriteID {
+			return favorite, nil
+		}
+	}
+	return nil, ErrFavoriteNotFound
+}
 
 
 // FavoritePayment добавления новых Избранных
@@ -213,7 +204,7 @@ func (s *Service) FavoritePayment(paymentID string, name string) (*types.Favorit
 
 //PayFromFavorite для совершения платежа в Избранное
 func (s *Service) PayFromFavorite(favoriteID string) (*types.Payment, error) {
-	favorite, err := s.FindFavoriteByID(favoriteID)
+    favorite, err := s.FindFavoriteByID(favoriteID)
 	if err != nil {
 		return nil, err
 	}
