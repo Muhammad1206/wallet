@@ -179,40 +179,6 @@ func (s *Service) FindFavoriteByID(favoriteID string) (*types.Favorite, error) {
 	}
 	return nil, ErrFavoriteNotFound
 }
-// FavoritePayment добавления новых Избранных
-func (s *Service) FavoritePayment(paymentID string, name string) (*types.Favorite, error) {
-	payment, err := s.FindPaymentByID(paymentID)
 
-	if err != nil {
-		return nil, err
-	}
-
-	favoriteID := uuid.New().String()
-	newFavorite := &types.Favorite{
-		ID:        favoriteID,
-		AccountID: payment.AccountID,
-		Name:      name,
-		Amount:    payment.Amount,
-		Category:  payment.Category,
-	}
-
-	s.favorites = append(s.favorites, newFavorite)
-	return newFavorite, nil
-}
-
-//PayFromFavorite для совершения платежа в Избранное
-func (s *Service) PayFromFavorite(favoriteID string) (*types.Payment, error) {
-    favorite, err := s.FindFavoriteByID(favoriteID)
-	if err != nil {
-		return nil, err
-	}
-
-	payment, err := s.Pay(favorite.AccountID, favorite.Amount, favorite.Category)
-	if err != nil {
-		return nil, err
-	}
-
-	return payment, nil
-}
 
 
